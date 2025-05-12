@@ -150,7 +150,7 @@ extension BaseAPI {
 	var domain: String? { nil }
 	var version: String? { nil }
 	var body: [String: Any]? { nil }
-	var multiPartBody: [Data]? { nil }
+	var multiPartBody: Data? { nil }
 }
 
 enum NetworkingError: Error {
