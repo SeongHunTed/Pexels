@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-protocol BaseAPI {
+public protocol BaseAPI {
 	var baseURL: String { get }
 	var url: String { get }
 	var domain: String? { get }
@@ -54,7 +54,7 @@ protocol BaseAPI {
 private let logger = Logger(subsystem: "Pexels", category: "Default")
 
 extension BaseAPI {
-	var url: String {
+	public var url: String {
 		var pathComponents = [baseURL]
 		
 		if let domain {
@@ -70,11 +70,11 @@ extension BaseAPI {
 		return pathComponents.joined(separator: "/")
 	}
 	
-	var header: [String: String]? {
+	public var header: [String: String]? {
 		APIConst.commonHeader.deepMerged(with: additionalHeader ?? [:])
 	}
 	
-	var urlRequest: URLRequest? {
+	public var urlRequest: URLRequest? {
 		guard var urlComponents = URLComponents(string: url) else {
 			logger.error("url Request error: \(NetworkingError.invalidURL), url: \(url)")
 			return nil
@@ -94,22 +94,22 @@ extension BaseAPI {
 		return urlRequest
 	}
 	
-	func request() async throws -> Data {
+	public func request() async throws -> Data {
 		guard let urlRequest else { throw NetworkingError.invalidURL }
 		return try await request(urlRequest)
 	}
 	
-	func request<Response: Decodable>(_ response: Response.Type) async throws -> Response {
+	public func request<Response: Decodable>(_ response: Response.Type) async throws -> Response {
 		guard let urlRequest else { throw NetworkingError.invalidURL }
 		return try await request(urlRequest, response: response)
 	}
 	
-	func request<Response: Decodable>(_ urlRequest: URLRequest, response: Response.Type) async throws -> Response {
+	public func request<Response: Decodable>(_ urlRequest: URLRequest, response: Response.Type) async throws -> Response {
 		let responseData = try await request(urlRequest)
 		return try JSONDecoder().decode(Response.self, from: responseData)
 	}
 	
-	func request(_ urlRequest: URLRequest) async throws -> Data {
+	public func request(_ urlRequest: URLRequest) async throws -> Data {
 		var urlRequest = urlRequest
 		let urlString = urlRequest.url?.absoluteString ?? "none"
 		logger.debug("request url: \(urlString)")
@@ -139,21 +139,21 @@ extension BaseAPI {
 		}
 	}
 	
-	func handleResponse(_ response: HTTPURLResponse) throws {
+	public func handleResponse(_ response: HTTPURLResponse) throws {
 		guard response.statusCode == 200 else { throw NetworkingError.invalidResponse(response) }
 	}
 }
 
 extension BaseAPI {
-	var queryItems: [URLQueryItem]? { nil }
-	var additionalHeader: [String: String]? { nil }
-	var domain: String? { nil }
-	var version: String? { nil }
-	var body: [String: Any]? { nil }
-	var multiPartBody: Data? { nil }
+	public var queryItems: [URLQueryItem]? { nil }
+	public var additionalHeader: [String: String]? { nil }
+	public var domain: String? { nil }
+	public var version: String? { nil }
+	public var body: [String: Any]? { nil }
+	public var multiPartBody: Data? { nil }
 }
 
-enum NetworkingError: Error {
+public enum NetworkingError: Error {
 	case invalidURL
 	case invalidQueryItems
 	case invalidResponse(_ response: URLResponse)

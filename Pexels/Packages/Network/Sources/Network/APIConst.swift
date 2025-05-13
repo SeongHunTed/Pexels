@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum APIConst {
-	static let timeout: TimeInterval = 10
-	static let commonHeader: [String: String] = [
+public enum APIConst {
+	public static let timeout: TimeInterval = 10
+	public static let commonHeader: [String: String] = [
 		"Content-Type": "application/json"
 	]
 }

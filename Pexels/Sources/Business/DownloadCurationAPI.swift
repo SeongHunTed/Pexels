@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 enum DownloadCurationAPI: BaseAPI {
 	case downloadCuration(page: Int)

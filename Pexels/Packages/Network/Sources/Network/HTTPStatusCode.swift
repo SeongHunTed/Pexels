@@ -12,7 +12,7 @@ import Foundation
  
  - seeAlso: https://datatracker.ietf.org/doc/html/rfc2616#page-39
  */
-enum HTTPStatusCode: Int {
+public enum HTTPStatusCode: Int {
 	case ok = 200
 	case unAuthorized = 401
 	case forbidden = 403

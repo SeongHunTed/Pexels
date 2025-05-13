@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		78210B922DD394BE00285AF5 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 78210B912DD394BE00285AF5 /* Network */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7846A2892DCF21A1006FA817 /* Pexels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pexels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +18,7 @@
 		7846A2B92DCF55B1006FA817 /* Exceptions for "Pexels" folder in "Pexels" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 7846A2882DCF21A1006FA817 /* Pexels */;
 		};
@@ -36,16 +40,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78210B922DD394BE00285AF5 /* Network in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78210B902DD394BE00285AF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7846A2802DCF21A1006FA817 = {
 			isa = PBXGroup;
 			children = (
 				7846A28B2DCF21A1006FA817 /* Pexels */,
+				78210B902DD394BE00285AF5 /* Frameworks */,
 				7846A28A2DCF21A1006FA817 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +91,7 @@
 			);
 			name = Pexels;
 			packageProductDependencies = (
+				78210B912DD394BE00285AF5 /* Network */,
 			);
 			productName = Pexels;
 			productReference = 7846A2892DCF21A1006FA817 /* Pexels.app */;
@@ -107,6 +121,9 @@
 			);
 			mainGroup = 7846A2802DCF21A1006FA817;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				7846A3D72DD39037006FA817 /* XCLocalSwiftPackageReference "Pexels/Packages/Network" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7846A28A2DCF21A1006FA817 /* Products */;
 			projectDirPath = "";
@@ -274,7 +291,7 @@
 				DEVELOPMENT_TEAM = 3ZYNC2J93W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Pexels/Info.plist;
+				INFOPLIST_FILE = Pexels/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -311,7 +328,7 @@
 				DEVELOPMENT_TEAM = 3ZYNC2J93W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Pexels/Info.plist;
+				INFOPLIST_FILE = Pexels/Resources/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -359,6 +376,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		7846A3D72DD39037006FA817 /* XCLocalSwiftPackageReference "Pexels/Packages/Network" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Pexels/Packages/Network;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		78210B912DD394BE00285AF5 /* Network */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Network;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7846A2812DCF21A1006FA817 /* Project object */;
 }
