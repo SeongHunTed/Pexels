@@ -11,7 +11,7 @@ import SwiftUI
 struct PexelsApp: App {
     var body: some Scene {
         WindowGroup {
-            PexelsMainView()
+            PexelTabView()
         }
     }
 }
