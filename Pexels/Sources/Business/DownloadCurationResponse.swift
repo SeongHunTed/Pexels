@@ -20,7 +20,7 @@ struct Curation: Decodable {
 	}
 }
 
-struct Photo: Decodable, Identifiable {
+struct Photo: Decodable, Identifiable, Hashable, Equatable {
 	let id, width, height: Int
 	let url: String
 	let photographer: String
@@ -37,6 +37,14 @@ struct Photo: Decodable, Identifiable {
 		case photographerID = "photographer_id"
 		case avgColor = "avg_color"
 		case src, liked, alt
+	}
+	
+	static func == (lhs: Photo, rhs: Photo) -> Bool {
+		lhs.id == rhs.id
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
 	}
 }
 
