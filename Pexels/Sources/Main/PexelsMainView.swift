@@ -22,22 +22,12 @@ struct PexelsMainView: View {
 			ScrollView {
 				LazyVGrid(columns: columns, spacing: 8) {
 					ForEach(mainModelData.photos, id: \.id) { photo in
-						if let url = URL(string: photo.src.medium) {
+						if let thumbnailURL = URL(string: photo.src.medium) {
 							NavigationLink(value: photo) {
-								GeometryReader { geometry in
-									AsyncImage(url: url) { image in
-										image
-											.resizable()
-											.scaledToFill()
-											.frame(maxWidth: geometry.size.width, maxHeight: 150)
-											.clipped()
-									} placeholder: {
-										Color.gray
-											.frame(width: geometry.size.width, height: 150)
+								PexelThumbnailView(url: thumbnailURL)
+									.onAppear {
+										mainModelData.fetchNextPageIfNeeded(currentItem: photo)
 									}
-								}
-								.frame(height: 150)
-								.cornerRadius(8)
 							}
 						}
 					}
@@ -48,8 +38,31 @@ struct PexelsMainView: View {
 				PexelImageDetailView(photo: photo)
 			}
 			.onLoad {
-				mainModelData.fetchImages(page: 1)
+				mainModelData.fetchInitialImages(page: 1)
 			}
+		}
+	}
+}
+
+extension PexelsMainView {
+	private struct PexelThumbnailView: View {
+		let url: URL
+		
+		var body: some View {
+			GeometryReader { geometry in
+				AsyncImage(url: url) { image in
+					image
+						.resizable()
+						.scaledToFit()
+						.frame(maxWidth: geometry.size.width, maxHeight: 150)
+						.clipped()
+				} placeholder: {
+					Color.gray
+						.frame(width: geometry.size.width, height: 150)
+				}
+			}
+			.frame(height: 150)
+			.cornerRadius(8)
 		}
 	}
 }

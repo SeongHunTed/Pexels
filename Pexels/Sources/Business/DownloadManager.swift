@@ -27,4 +27,18 @@ final class DownloadManager {
 		}
 		.eraseToAnyPublisher()
 	}
+	
+	func downloadCurations(from urlString: String) -> AnyPublisher<Curation, Error> {
+		guard
+			let url = URL(string: urlString),
+			let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+			let pageString = components.queryItems?.first(where: { $0.name == "page" })?.value,
+			let page = Int(pageString)
+		else {
+			logger.error("Invalid next_page URL: \(urlString)")
+			return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
+		}
+		
+		return downloadCurations(page: page)
+	}
 }

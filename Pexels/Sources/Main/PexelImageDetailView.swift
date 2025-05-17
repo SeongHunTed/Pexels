@@ -12,7 +12,7 @@ struct PexelImageDetailView: View {
 	
     var body: some View {
 		VStack {
-			if let url = URL(string: photo.src.medium) {
+			if let url = URL(string: photo.src.large) {
 				AsyncImage(url: url) { image in
 					image
 						.resizable()

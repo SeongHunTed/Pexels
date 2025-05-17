@@ -22,7 +22,10 @@ enum DownloadCurationAPI: BaseAPI {
 	var queryItems: [URLQueryItem]? {
 		switch self {
 		case let .downloadCuration(page):
-			[URLQueryItem(name: "page", value: "\(page)")]
+			[
+				URLQueryItem(name: "page", value: "\(page)"),
+				URLQueryItem(name: "per_page", value: "16")
+			]
 		}
 	}
 }
