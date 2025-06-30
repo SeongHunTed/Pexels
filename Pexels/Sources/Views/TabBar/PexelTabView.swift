@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct PexelTabView: View {
+    @EnvironmentObject var coordinator: Coordinator
+    
     var body: some View {
-		TabView {
-			PexelsMainView()
-				.tabItem {
-					Label(PexelTabType.main.display, systemImage: PexelTabType.main.imageName)
-				}
-			
-			FavoriteView()
-				.tabItem {
-					Label(PexelTabType.favorite.display, systemImage: PexelTabType.favorite.imageName)
-				}
-			
-			MyPageView()
-				.tabItem {
-					Label(PexelTabType.mypage.display, systemImage: PexelTabType.mypage.imageName)
-				}
-		}
-		.tint(.purple)
+        ZStack(alignment: .bottom) {
+            TabView(selection: $coordinator.selection) {
+                PexelsMainView()
+                    .tag(Tab.main.id)
+                
+                FavoriteView()
+                    .tag(Tab.favorite.id)
+                
+                MyPageView()
+                    .tag(Tab.mypage.id)
+            }
+            
+            TabBar(tabID: $coordinator.selection)
+        }
     }
 }
 
