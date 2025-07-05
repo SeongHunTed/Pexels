@@ -30,7 +30,7 @@ struct PexelImageDetailView: View {
 		}
 		.padding()
 		.navigationTitle(photo.alt)
-		.navigationBarTitleDisplayMode(.inline)
+//		.navigationBarTitleDisplayMode(.inline)
     }
 }
 

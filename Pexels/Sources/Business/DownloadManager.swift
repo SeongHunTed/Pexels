@@ -11,7 +11,7 @@ import OSLog
 
 private let logger = Logger(subsystem: "Pexels", category: "DownloadManager")
 
-final class DownloadManager {
+struct DownloadManager {
 	func downloadCurations(page: Int) -> AnyPublisher<Curation, Error> {
 		Future { promise in
 			Task {

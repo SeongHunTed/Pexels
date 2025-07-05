@@ -15,15 +15,11 @@ final class MainModelData: ObservableObject {
 	private var cancellables: Set<AnyCancellable> = []
 	
 	private(set) var nextPageURL: String?
-	private var isLoading = false
 	
 	func fetchInitialImages(page: Int) {
-		isLoading = true
-		
 		downloadManager.downloadCurations(page: page)
 			.receive(on: DispatchQueue.main)
-			.sink { [weak self] completion in
-				self?.isLoading = false
+			.sink { completion in
 				if case .failure(let error) = completion {
 					print("Error: \(error)")
 				}
@@ -34,8 +30,8 @@ final class MainModelData: ObservableObject {
 			.store(in: &cancellables)
 	}
 	
-	func fetchNextPageIfNeeded(currentItem item: Photo) {
-		guard let nextPageURL, !isLoading else { return }
+	func loadNextPage(currentItem item: Photo) {
+		guard let nextPageURL else { return }
 		guard let thresholdItem = photos.suffix(5).first else { return }
 		if thresholdItem.id == item.id {
 			fetchNextPage(from: nextPageURL)
@@ -43,12 +39,9 @@ final class MainModelData: ObservableObject {
 	}
 	
 	private func fetchNextPage(from url: String) {
-		isLoading = true
-		
 		downloadManager.downloadCurations(from: url)
 			.receive(on: DispatchQueue.main)
-			.sink { [weak self] completion in
-				self?.isLoading = false
+			.sink { completion in
 				if case .failure(let error) = completion {
 					print("Error: \(error)")
 				}

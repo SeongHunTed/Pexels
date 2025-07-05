@@ -50,7 +50,6 @@ public protocol BaseAPI {
 }
 
 // MARK: - Default Implementation
-
 private let logger = Logger(subsystem: "Pexels", category: "Default")
 
 extension BaseAPI {
